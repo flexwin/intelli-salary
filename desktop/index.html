@@ -2,126 +2,127 @@
 <html lang="zh-cn">
 
 <head>
-  <title>工资邮件群发工具</title>
-  <link rel="stylesheet" type="text/css" href="css/bootplus.css" media="screen">
-  <link rel="stylesheet" type="text/css" href="css/bootplus-responsive.css" media="screen">
-  <link rel="stylesheet" type="text/css" href="css/nprogress.css">
-  <link rel="stylesheet" type="text/css" href="css/index.css">
-  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta rel="stylesheet" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工资邮件群发工具</title>
+    <link rel="stylesheet" type="text/css" href="css/bootplus.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="css/bootplus-responsive.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="css/nprogress.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta rel="stylesheet" name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-  <div class="top-titlebar">
-<!--    <button id="loadStaffdata" class="btn btn-default" type="button"><i class="fa fa-file-excel-o" aria-hidden="true"></i> 加载员工表</button>-->
-    <button id="loadSalarydata" class="btn btn-default" type="button"><i class="fa fa-file-excel-o" aria-hidden="true"></i> 加载工资表</button>
+<div class="top-titlebar">
+    <!--    <button id="loadStaffdata" class="btn btn-default" type="button"><i class="fa fa-file-excel-o" aria-hidden="true"></i> 加载员工表</button>-->
+    <button id="loadSalarydata" class="btn btn-default" type="button"><i class="fa fa-file-excel-o"
+                                                                         aria-hidden="true"></i> 加载工资表
+    </button>
 
-    <button id="sendmail" class="btn btn-default" type="button"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span id="sendmail_text">发送邮件</span></button>
-    <button id="openAppConfigBtn" class="btn btn-default " type="button"><i class="fa fa-cog" aria-hidden="true"></i> 设置</button>
-    <button id="aboutUs" class="btn btn-default " type="button"><i class="fa fa-info-circle" aria-hidden="true"></i> 关于</button>
-  </div>
+    <button id="sendmail" class="btn btn-default" type="button"><i class="fa fa-envelope-o" aria-hidden="true"></i>
+        <span id="sendmail_text">发送邮件</span></button>
+    <button id="openAppConfigBtn" class="btn btn-default " type="button"><i class="fa fa-cog" aria-hidden="true"></i> 设置
+    </button>
+    <button id="aboutUs" class="btn btn-default " type="button"><i class="fa fa-info-circle" aria-hidden="true"></i> 关于
+    </button>
+</div>
 
-  <form id="subject-form" class="form-inline top-subject">
+<form id="subject-form" class="form-inline top-subject">
     <span>&nbsp;邮件主题：</span>
     <input id="input-small" type="text" class="input-small" style="width:90%" v-model="message">
+</form>
 
-  </form>
+<div class="body-div">
+    <textarea id="mailhead" style="color: rgb(230, 67, 64);border-width:0px;box-shadow:none;height:100%;" class="span12"
+              v-bind="message"></textarea>
+    <table id="salarylist" class="table table-bordered table-striped table-hover"></table>
+</div>
 
-
-  <div class="body-div">
-
-    <textarea id="mailhead" style="color:red;border-width:0px;box-shadow:none;height:100%;" class="span12" v-bind="message"></textarea>
-    <table id="salarylist" class="table table-bordered table-striped"></table>
-  </div>
-
-  <script id="salarylist-template" type="text/x-handlebars-template">
-
+<script id="salarylist-template" type="text/x-handlebars-template">
     <thead>
-      <tr>
+    <tr>
         <th>
-          <center>#</center>
+            <center>#</center>
         </th>
-
         {{#each cells}}
         <th>
-          {{this.name}}
+            {{this.name}}
         </th>
         {{/each}}
-
-      </tr>
+    </tr>
     </thead>
     <tbody>
-      {{{rowHtml}}}
+    {{{rowHtml}}}
     </tbody>
-  </script>
+</script>
 
-  <script id="salarysettings-template" type="text/x-handlebars-template">
+<script id="salarysettings-template" type="text/x-handlebars-template">
     <form class="form-horizontal">
-      <label style="padding-left:20px;font-size:18px"> 邮件设置：</label>
-      <hr>
-      <div class="control-group">
-        <label class="control-label" for="inputEmail">发信邮箱</label>
-        <div class="controls">
-          <input type="text" id="inputEmail" placeholder="Email" value="{{auth.user}}">
+        <label style="padding-left:20px;font-size:18px"> 邮件设置：</label>
+        <hr>
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">发信邮箱</label>
+            <div class="controls">
+                <input type="text" id="inputEmail" placeholder="Email" value="{{auth.user}}">
+            </div>
         </div>
-      </div>
-      <div class="control-group">
-        <label class="control-label" for="inputPassword">邮箱密码</label>
-        <div class="controls">
-          <input type="password" id="inputPassword" placeholder="Password" value="{{auth.pass}}">
+        <div class="control-group">
+            <label class="control-label" for="inputPassword">邮箱密码</label>
+            <div class="controls">
+                <input type="password" id="inputPassword" placeholder="Password" value="{{auth.pass}}">
+            </div>
         </div>
-      </div>
-
-      <div class="control-group">
-        <label class="control-label" for="sendserver">发件服务器</label>
-        <div class="controls">
-          <input type="text" id="sendserver" placeholder="URL" value="{{host}}">
-          <input class="input-mini" type="text" placeholder="端口" id="sendprot" value="{{port}}">
-        </div>
-      </div>
-
-      <div class="control-group">
-        <div class="controls">
-          <button id="verifyConfigurationBtn" type="button" class="btn">测试</button><i id="loadingIcon" class="fa fa-circle-o-notch fa-spin fa-fw icon-state-info hidden"></i>
-        </div>
-      </div>
-
-      <hr>
-      <label style="padding-left:20px;font-size:18px"> 内容设置：</label>
-
-      <div class="control-group">
 
         <div class="control-group">
-          <label class="control-label" for="sendserver">发件人</label>
-          <div class="controls">
-            <input type="text" id="fromName" value="{{auth.fromName}}">
-          </div>
+            <label class="control-label" for="sendserver">发件服务器</label>
+            <div class="controls">
+                <input type="text" id="sendserver" placeholder="URL" value="{{host}}">
+                <input class="input-mini" type="text" placeholder="端口" id="sendprot" value="{{port}}">
+            </div>
         </div>
-        <div class="controls">
 
-          <label>勾选邮件中需要显示的列  &nbsp;&nbsp; </label>
-          {{#each cells}}
-          <input name="cells" type="checkbox" {{#if this.used}}checked{{/if}} value="{{this.name}}"> {{this.name}}
-          <br> {{/each}}
+        <div class="control-group">
+            <div class="controls">
+                <button id="verifyConfigurationBtn" type="button" class="btn">测试</button>
+                <i id="loadingIcon" class="fa fa-circle-o-notch fa-spin fa-fw icon-state-info hidden"></i>
+            </div>
         </div>
-      </div>
 
-      <div class="control-group">
-        <div class="controls">
-          <button id="save-settings" type="button" class="btn btn-primary">保存</button>
-          <button type="submit" class="btn">取消</button>
+        <hr>
+        <label style="padding-left:20px;font-size:18px"> 内容设置：</label>
+
+        <div class="control-group">
+
+            <div class="control-group">
+                <label class="control-label" for="sendserver">发件人</label>
+                <div class="controls">
+                    <input type="text" id="fromName" value="{{auth.fromName}}">
+                </div>
+            </div>
+            <div class="controls">
+
+                <label>勾选邮件中需要显示的列 &nbsp;&nbsp; </label>
+                {{#each cells}}
+                <input name="cells" type="checkbox" {{#if this.used}}checked{{/if}} value="{{this.name}}"> {{this.name}}
+                <br> {{/each}}
+            </div>
         </div>
-      </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <button id="save-settings" type="button" class="btn btn-primary">保存</button>
+                <button type="submit" class="btn">取消</button>
+            </div>
+        </div>
     </form>
-  </script>
+</script>
 
-  <script type="text/javascript" src="js/handlebars-v4.0.5.js"></script>
-  <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
-  <script type="text/javascript" src="js/nprogress.js"></script>
-  <script type="text/javascript" src="js/bootstrap.js"></script>
-  <script type="text/javascript" src="js/app.js"></script>
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript" src="js/handlebars-v4.0.5.js"></script>
+<script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="js/nprogress.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
 </body>
 
 </html>

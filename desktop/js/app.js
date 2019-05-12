@@ -97,7 +97,6 @@ $(document).ready(() => {
     });
     data.message = small;
 
-
     var openAppConfigBtn = $('#openAppConfigBtn');
     openAppConfigBtn.click(randerSettings);
 
@@ -111,7 +110,6 @@ ipcRenderer.on('salary-ready-reply', (event, dbExists) => {
     if (dbExists) {
         let options = {
             title: '信息',
-            buttons: ['OK'],
             message: '温馨提示'
         };
         options.detail = `发现有上次处理的工资条，是否继续发送？`;
