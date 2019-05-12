@@ -1,5 +1,6 @@
 // In renderer process (web page).
 const {ipcRenderer} = require('electron')
+const { dialog } = require('electron').remote
 const shell = require('electron').shell;
 const fs = require('fs');
 const BrowserWindow = require('electron').remote.BrowserWindow
@@ -7,7 +8,6 @@ const path = require('path');
 const Store = require('electron-store');
 const config = new Store();
 const XLSX = require('../lib/xlsx');
-const Prompt = require('../desktop/js/prompt/index');
 
 const {
     remote
@@ -52,12 +52,8 @@ const MAIL_STATE = {
 
 var scrollHeight;
 $(document).ready(() => {
-    $('#loadStaffdata').click(function () {
-        ipcRenderer.send('open-staff-file-dialog-message', '');
-    });
-
     $('#loadSalarydata').click(function () {
-        ipcRenderer.send('open-salary-file-dialog-message', '');
+       ipcRenderer.send('open-salary-file-dialog-message', '');
     });
 
     $('#sendmail').click(function () {
@@ -113,24 +109,20 @@ $(document).ready(() => {
 
 ipcRenderer.on('salary-ready-reply', (event, dbExists) => {
     if (dbExists) {
-        var prompt = new Prompt({
-            title: '发现有上次处理的工资条，是否继续发送？',
-            body: ``,
-            buttons: [{
-                text: '放弃，重新加载数据表',
-                click: function () {
-                    ipcRenderer.send('open-salary-file-dialog-message');
-                    prompt.close();
-                }
-            }, {
-                text: '继续处理上次未发送成功的数据',
-                click: function () {
-                    ipcRenderer.send('salary-get-message');
-                    prompt.close();
-                }
-            }]
+        let options = {
+            title: '信息',
+            buttons: ['OK'],
+            message: '温馨提示'
+        };
+        options.detail = `发现有上次处理的工资条，是否继续发送？`;
+        options.buttons = ['重新导入', '继续处理'];
+        dialog.showMessageBox(options, function (optional) {
+            if (optional === 0) {
+                ipcRenderer.send('open-salary-file-dialog-message');
+            } else if (optional === 1) {
+                ipcRenderer.send('salary-get-message');
+            }
         });
-        prompt.show();
     } else {
         ipcRenderer.send('open-salary-file-dialog-message');
     }

@@ -28,22 +28,6 @@
     margin-right: 0px;
 }
 
-.top-modal-alert {
-    position: fixed;
-    top: 59px;
-    left: 10%;
-    width: 80%;
-    height: 160px;
-    margin: 0 auto;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #c3c3c3;
-    border-bottom-right-radius: 2px;
-    border-bottom-left-radius: 2px;
-    background-color: #efefef;
-    box-shadow: 1px 1px 15px #c3c3c3;
-}
-
 a:link {
     text-decoration: none;
 }
