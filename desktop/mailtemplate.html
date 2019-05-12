@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <span style="color: rgb(230, 67, 64); font-size: 13px; line-height: normal;"><pre>{{mailhead}}</pre></span>
+
+    <table cellspacing="0px" style="width:100%;border:1px #888888 outset;border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+            <tr>
+                {{#each titles}}
+                <td style="border:1px #888888 inset;padding:1px;">
+                    <span style="color: rgb(53, 53, 53); font-weight:bold; font-family: Roboto, arial, sans-serif; font-size: 13px; font-variant-ligatures: normal; orphans: 2; widows: 2;">
+                      {{this}}</span>
+                </td>
+                {{/each}}
+            </tr>
+            <tr>
+                {{#each cells}}
+                <td style="border:1px #888888 inset;padding:1px;">
+                    <span style="color: rgb(87, 107, 149); font-family: Roboto, arial, sans-serif; font-size: 13px; font-variant-ligatures: normal; orphans: 2; widows: 2;">
+                      {{this}}</span>
+                </td>
+                {{/each}}
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
