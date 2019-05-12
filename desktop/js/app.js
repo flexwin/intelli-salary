@@ -1,6 +1,6 @@
 // In renderer process (web page).
 const {ipcRenderer} = require('electron')
-const { dialog } = require('electron').remote
+const {dialog} = require('electron').remote
 const shell = require('electron').shell;
 const fs = require('fs');
 const BrowserWindow = require('electron').remote.BrowserWindow
@@ -53,7 +53,7 @@ const MAIL_STATE = {
 var scrollHeight;
 $(document).ready(() => {
     $('#loadSalarydata').click(function () {
-       ipcRenderer.send('open-salary-file-dialog-message', '');
+        ipcRenderer.send('open-salary-file-dialog-message', '');
     });
 
     $('#sendmail').click(function () {
@@ -262,13 +262,12 @@ ipcRenderer.on('sendmail-reply', (event, docs) => {
 })
 
 //更新进度条通知
+const uProgress = new UProgress();
 ipcRenderer.on('progress-percentage-reply', (event, arg) => {
     if (arg < 1) {
-        NProgress.start()
+        uProgress.start()
     } else if (arg >= 100) {
-        NProgress.done()
-    } else {
-        NProgress.inc()
+        uProgress.done()
     }
 });
 
@@ -323,8 +322,8 @@ function openAboutWindow() {
         })
         terminalWin.loadURL(modalPath)
     }
-
     terminalWin.show();
+    ipcRenderer.send('check-for-available-update', '');
 }
 
 function getAsarUnpackedPath(basePath) {

@@ -141,3 +141,43 @@ body {
 background: #cecece;
 
 }
+
+.uprogress-multi {
+    top: 0;
+    overflow: hidden;
+    height: 3px;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.uprogress-multi .bar {
+    height: 2px;
+    position: absolute;
+    background-color: #17a0d3;
+    pointer-events: none;
+    will-change: transform;
+    top: 0;
+    background-image: -webkit-gradient(linear,left top,right top,from(#17a0d3),color-stop(#713ed0),color-stop(#fc8d03),color-stop(#38ad5d),to(#17a0d3));
+    background-image: -webkit-linear-gradient(left,#17a0d3,#713ed0,#fc8d03,#38ad5d,#17a0d3);
+    background-image: -moz-linear-gradient(left,#17a0d3,#713ed0,#fc8d03,#38ad5d,#17a0d3);
+    background-image: -o-linear-gradient(left,#17a0d3,#713ed0,#fc8d03,#38ad5d,#17a0d3);
+    background-image: linear-gradient(90deg,#17a0d3,#713ed0,#fc8d03,#38ad5d,#17a0d3);
+    background-size: 500%;
+    -webkit-animation-name: uprogress-multi,fadein;
+    -moz-animation-name: uprogress-multi,fadein;
+    -o-animation-name: uprogress-multi,fadein;
+    animation-name: uprogress-multi,fadein;
+    -webkit-animation-duration: 2s,.3s;
+    -moz-animation-duration: 2s,.3s;
+    -o-animation-duration: 2s,.3s;
+    animation-duration: 2s,.3s;
+    -webkit-animation-timing-function: linear,ease;
+    -moz-animation-timing-function: linear,ease;
+    -o-animation-timing-function: linear,ease;
+    animation-timing-function: linear,ease;
+    -webkit-animation-iteration-count: infinite,1;
+    -moz-animation-iteration-count: infinite,1;
+    -o-animation-iteration-count: infinite,1;
+    animation-iteration-count: infinite,1;
+}
