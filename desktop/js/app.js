@@ -56,6 +56,10 @@ $(document).ready(() => {
         ipcRenderer.send('open-salary-file-dialog-message', '');
     });
 
+    $('#exitBtn').click(function () {
+        ipcRenderer.send('app-quit', '')
+    });
+
     $('#sendmail').click(function () {
         let small = $('.input-small').val();
         let mailhead = $('#mailhead').val();

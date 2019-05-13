@@ -26,6 +26,7 @@ function createWindow() {
         width: 1250,
         height: 750,
         icon: `${__dirname}/images/app_icon.png`,
+        frame: false,
         webPreferences: {
             nodeIntegration: true
         }
