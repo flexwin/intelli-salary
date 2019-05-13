@@ -1,6 +1,6 @@
 {
   "name": "intelli-salary",
-  "productName": "智能工资条邮件群发工具",
+  "productName": "Intelli Salary",
   "version": "1.0.0",
   "description": "一款工资条邮件群发智能小工具",
   "license": "MIT",
@@ -17,10 +17,11 @@
     "asar": "asar pack ./ app.asar --unpack xlsx",
     "buildwin": "electron-packager ./ $npm_package_productName --out=dist --platform=win32 --arch=x64 --overwrite --ignore=test --win32metadata.FileDescription=$npm_package_productName --win32metadata.ProductName=$npm_package_productName --appCopyright='Copyright(C) 2019 Sahara, Inc' --asar.unpackDir=xlsx  --icon=images/app_icon.ico",
     "buildmac": "electron-packager ./ $npm_package_productName --out=dist --platform=darwin --overwrite --ignore=test --asar.unpackDir=xlsx --appCopyright='Copyright(C) 2019 Sahara, Inc' --icon=images/app_icon.icos",
-    "build": "npm run buildwin && npm run buildmac"
+    "build": "npm run buildmac && npm run buildwin"
   },
   "devDependencies": {
-    "electron": "^5.0.0"
+    "electron": "^5.0.0",
+    "electron-packager": "^13.1.1"
   },
   "dependencies": {
     "electron-store": "^3.2.0",
