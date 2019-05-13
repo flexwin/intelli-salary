@@ -1,6 +1,11 @@
-# 工资条邮件群发工具
+# Intelligent salary mail tool 
 
-# 使用步骤
-1. 选择工资明细表
-2. 配置界面配置邮箱和需要发送的工资条的列，保存
-3. 发送邮件
+## Usage
+1. select salary and staff excel files
+2. configure and apply save
+3. send
+
+## Donation
+If you find this tool useful, you can buy us a cup of coffee
+
+<img width="420" src="https://user-images.githubusercontent.com/3170158/57591289-3dc45580-7563-11e9-9c6b-7feca59bb6f1.png" alt="donation">
